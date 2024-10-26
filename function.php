@@ -16,6 +16,7 @@ function tambah_menu($data)
 {
        global $koneksi;
 
+       $kode = htmlspecialchars($data['id_menu']);
        $nama = htmlspecialchars($data['nama_menu']);
        $jenis = htmlspecialchars($data['jenis_menu']);
        $stok = htmlspecialchars($data['stok']);
@@ -71,4 +72,6 @@ function upload()
 function edit_menu($data)
 {
        global $koneksi;
+
+
 }
