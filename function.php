@@ -21,6 +21,7 @@ function tambah_menu($data)
     $jenis = htmlspecialchars($data['jenis_menu']);
     $stok = htmlspecialchars($data['stok']);
     $harga = htmlspecialchars($data['harga']);
+    $gambar = upload();
     
     // Pastikan jumlah kolom dan nilai cocok
     // Misalkan tabel produk memiliki kolom: id_menu (auto-increment), nama_menu, jenis_menu, stok, harga
@@ -45,7 +46,20 @@ function upload()
        $ekstensiGambar = strtolower( end($ekstensiGambar));
 
        if (!in_array($ekstensiGambar,$ekstensiGambarValid)){
-              
+              echo "<script> alert ('file yang di uplod harus gambar')</script>";
+              return false ;
        }
+
+       if ($ukuranfile > 1000000){
+              echo "<script> alert('file kebesaran bosku')";
+              return false;
+       }
+
+       $namafileBaru = uniqid();
+       $namafileBaru = '.';
+       $namafileBaru = $ekstensiGambar;
+
+       move_uploaded_file($tmpName, "/upload". $namafileBaru);
+       return $namafileBaru;
 }
  ?>
