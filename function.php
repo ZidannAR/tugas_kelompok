@@ -25,9 +25,12 @@ function tambah_menu($data)
     if (!$gambar) {
         return false;
     }
-
+    
     // Corrected INSERT query
-    mysqli_query($koneksi, "INSERT INTO produk (nama_menu, jenis_menu, stok, harga, gambar) VALUES ('$nama', '$jenis', '$stok', '$harga', '$gambar')");
+    $kirim=mysqli_query($koneksi, "INSERT INTO produk (nama_menu, jenis_menu, stok, harga, gambar) VALUES ('$nama', '$jenis', '$stok', '$harga', '$gambar')");
+    if ($kirim){
+       header("location: daftar_menu.php");
+    }
 }
 
 function upload()
