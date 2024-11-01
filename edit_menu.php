@@ -33,6 +33,7 @@ include_once('./template/header.php');
         <div class="form-group">
           <label for="menu1">Nama Menu</label>
           <input type="hidden" name="id_menu" value="<?= $id ?>">
+          <input type="hidden" name="gambarLama" value="<?= $data['gambar'] ?>">
           <input type="text" class="form-control" id="menu1" name="nama_menu" value="<?= $data['nama_menu'] ?>">
 
         </div>

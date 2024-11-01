@@ -21,7 +21,7 @@ require 'function.php';
                 <h5 class="card-title font-weight-bold" ><?= $asoy['nama_menu'] ?> </h5>
                <label class="card-text harga"><strong>Rp.</strong><?=number_format($asoy['harga'])  ?></label><br>
                 <a href="edit_menu.php?id_menu=<?= $asoy['id_menu']?>" class="btn btn-primary btn-sm">EDIT</a>
-                <a href="#" class="btn btn-danger btn-sm">HAPUS</a>
+                <a onclick="confirm('apakah anda yakin menghapus gambar ini?')" href="hapus_menu.php?id_menu=<?= $asoy['id_menu']?>" class="btn btn-danger btn-sm">HAPUS</a>
               </div>
             </div>
           </div>

@@ -77,8 +77,14 @@ function edit_menu($data)
        $nama = htmlspecialchars($data['nama_menu']);
        $stok = ($data['stok']);
        $harga = ($data['harga']);
-       $gambar = upload();
-       mysqli_query($koneksi,"UPDATE produk SET 
+
+       $gambarLama = htmlspecialchars($data['gambarLama']);
+       if ($_FILES['gambar']['error'] === 4) {
+              $gambar = $gambarLama;
+       } else {
+              $gambar = upload();
+       }
+       mysqli_query($koneksi, "UPDATE produk SET 
        nama_menu = '$nama',
        stok = $stok ,
        harga= $harga,
@@ -87,5 +93,17 @@ function edit_menu($data)
        WHERE id_menu= $id ");
 
 
-return mysqli_affected_rows($koneksi);
+       return mysqli_affected_rows($koneksi);
+}
+
+function hapus_menu($id)
+{
+       global $koneksi;
+
+       $query = "DELETE FROM produk WHERE id_menu = $id";
+
+       mysqli_query($koneksi, $query);
+       return mysqli_affected_rows($koneksi);
+
+
 }
