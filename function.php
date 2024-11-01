@@ -1,5 +1,5 @@
 <?php
-require('koneksi.php');
+require_once('koneksi.php');
 
 function query($query)
 {
@@ -73,5 +73,19 @@ function edit_menu($data)
 {
        global $koneksi;
 
+       $id = ($data['id_menu']);
+       $nama = htmlspecialchars($data['nama_menu']);
+       $stok = ($data['stok']);
+       $harga = ($data['harga']);
+       $gambar = upload();
+       mysqli_query($koneksi,"UPDATE produk SET 
+       nama_menu = '$nama',
+       stok = $stok ,
+       harga= $harga,
+       gambar = '$gambar'
 
+       WHERE id_menu= $id ");
+
+
+return mysqli_affected_rows($koneksi);
 }

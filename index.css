@@ -9,9 +9,9 @@ body {
 
 /*Jumbotron*/
 .jumbotron {
-	background-image: url(images/background/bg8.jpg);
+	background-image: url(gojo.gif);
 	background-size: cover;
-	height: 350px;
+	height: 400px;
 	width: 100%;
 	color: white;
 }

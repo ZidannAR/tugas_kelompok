@@ -18,10 +18,10 @@
   <!-- Jumbotron -->
       <div class="jumbotron jumbotron-fluid text-center">
         <div class="container">
-          <h1 class="display-4"><span class="font-weight-bold">BAKSO SOLO BARU</span></h1>
+          <h1 class="display-4"><span class="font-weight-bold">Konter Hp Smakzie</span></h1>
           <hr>
-          <p class="lead font-weight-bold">Silahkan Pesan Menu Sesuai Keinginan Anda <br> 
-          Enjoy Your Meal</p>
+          <p class="lead font-weight-bold">Silahkan Pilih Hp Sesuai Keinginan <br> 
+          Happy Shopping</p>
         </div>
       </div>
   <!-- Akhir Jumbotron -->
@@ -40,7 +40,7 @@
               <a class="nav-link mr-4" href="index.php">HOME</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mr-4" href="daftar_menu.php">DAFTAR MENU</a>
+              <a class="nav-link mr-4" href="daftar_menu.php">PRODUK</a>
             </li>
             <li class="nav-item">
               <a class="nav-link mr-4" href="pesanan.php">PESANAN</a>
