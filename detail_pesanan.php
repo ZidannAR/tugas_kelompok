@@ -1,5 +1,6 @@
 <?php
 require_once('function.php');
+require_once('koneksi.php');
 
 ?>
 <?php
@@ -43,7 +44,7 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg  bg-dark">
     <div class="container">
-      <a class="navbar-brand text-white" href="index.html"><strong>Bakso</strong> Solo Baru</a>
+      <a class="navbar-brand text-white" href="index.html"><strong>Toko</strong> Hp</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -133,7 +134,28 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
     <form method="POST" action="">
         <a href="menu_pembeli.php" class="btn btn-primary btn-sm">Lihat Menu</a>
         <button class="btn btn-success btn-sm" name="konfirm">Konfirmasi Pesanan</button>
-      </form>   
+      </form>
+
+      <?php
+      if(isset($_POST["konfirm"])){
+        $tanggal_pemesanan = date("Y-m-d");
+
+        $insert = mysqli_query($koneksi,"INSERT INTO pemesanan (tanggal_pemesanan, total_belanja) VALUES ('$tanggal_pemesanan','$totalbelanja')");
+
+        $id_terbaru = $koneksi->$insert_id;
+
+        foreach($_SESSION["pesanan"] as  $id_menu => $jumlah)
+        {
+          $insert = mysqli_query($koneksi,"INSERT INTO detail_pemesanan(id_pemesanan, id_menu, jumlah) 
+          VALUES ('$id_terbaru', '$id_menu','$jumlah') ");
+        }
+
+        unset($_SESSION["pesanan"]);
+
+        echo "<script>alert('pesanan anda telah di konfirmasi')</script>";
+        echo "<script>location= daftar_menu_pembeli.php</script>";
+      }
+       ?>
 
     <hr class="footer">
     <div class="container">
