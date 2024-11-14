@@ -142,7 +142,8 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
 
         $insert = mysqli_query($koneksi,"INSERT INTO pemesanan (tanggal_pemesanan, total_belanja) VALUES ('$tanggal_pemesanan','$totalbelanja')");
 
-        $id_terbaru = $koneksi->$insert_id;
+        $id_terbaru = $koneksi->insert_id;
+
 
         foreach($_SESSION["pesanan"] as  $id_menu => $jumlah)
         {
