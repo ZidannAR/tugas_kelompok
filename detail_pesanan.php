@@ -114,8 +114,9 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
           <td>Rp.
             <?= number_format($subharga)  ?>
           </td>
+          <?php $totalbelanja += $subharga; ?>
           <td>
-            <a href="hapus_pesanan.php?id_menu=<?php echo $id_menu ?>" class="badge badge-danger">Hapus</a>
+            <a href="hapus_pesanan_pembeli.php?id_menu=<?php echo $id_menu ?>" class="badge badge-danger">Hapus</a>
           </td>
         </tr>
         <?php
