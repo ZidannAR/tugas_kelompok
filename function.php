@@ -32,6 +32,7 @@ function tambah_menu($data)
        if ($kirim) {
               header("location: daftar_menu.php");
        }
+       return mysqli_affected_rows($koneksi);
 }
 
 function upload()
@@ -106,4 +107,24 @@ function hapus_menu($id)
        return mysqli_affected_rows($koneksi);
 
 
+}
+function register_admin($data)
+{
+       global $koneksi;
+
+       $kode = htmlspecialchars($data['id_user']);
+       $nama_lengkap = htmlspecialchars($data['nama_lengkap']);
+       $jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
+       $tanggal_lahir = date($data['tanggal_lahir']);
+       $alamat = htmlspecialchars($data['alamat']);
+       $no_hp = htmlspecialchars($data['hp']);
+       $username = htmlspecialchars($data['username']);
+       $password = htmlspecialchars($data['password']);
+
+
+       // Corrected INSERT query
+       $kirim = mysqli_query($koneksi, "INSERT INTO  admin  VALUES ('$nama_lengkap', '$jenis_kelamin', '$alamat', '$no_hp', '$tanggal_lahir','$username','$password')");
+       if ($kirim) {
+              header("location: login_admin.php");
+       }
 }

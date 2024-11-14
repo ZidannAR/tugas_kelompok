@@ -1,9 +1,18 @@
-<?php include('./template/header.php'); ?>
+<?php include('./template/header.php');
+require_once('function.php');
+
+if(isset($_GET['id_menu'])){
+  $id = $_GET['id_menu'];
+  $data = query("SELECT * FROM produk WHERE id_menu = $id")[0];
+
+  
+}
+ ?>
+ 
 
   <!-- Menu -->
     <div class="container">
-      <div class="judul-pesanan mt-5
-      \">
+      <div class="judul-pesanan mt-5\">
        
         <h3 class="text-center font-weight-bold">DATA PESANAN</h3>
         
@@ -24,7 +33,7 @@
           <tr>
             <th scope="row">1</th>
             <td>01</td>
-            <td>Bakso</td>
+            <td><?= $data ['nama_menu']?></td>
             <td>2</td>
             <td>2020-01-03</td>
             <td>Belum Bayar</td>
