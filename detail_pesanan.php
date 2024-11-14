@@ -131,9 +131,9 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
     </table><br>
 
     <form method="POST" action="">
-      <a href="pesanan.php" class="btn btn-success btn-sm">Kembali</a>
-      <button class="btn btn-primary btn-sm" name="bayar">Konfirmasi Pembayaran</button>
-    </form>
+        <a href="menu_pembeli.php" class="btn btn-primary btn-sm">Lihat Menu</a>
+        <button class="btn btn-success btn-sm" name="konfirm">Konfirmasi Pesanan</button>
+      </form>   
 
     <hr class="footer">
     <div class="container">
