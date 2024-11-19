@@ -15,7 +15,7 @@ require_once("function.php");
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="stylesheet" type="text/css" href="fontawesome/css/all.min.css">
 
-  <title>Bakso Solo Baru</title>
+  <title>Toko Hp</title>
 </head>
 
 <body>
