@@ -58,7 +58,7 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
             <a class="nav-link mr-4" href="daftar_menu_pembeli.php">PRODUK</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link mr-4" href="pesanan.php">PESANAN</a>
+            <a class="nav-link mr-4" href="pesanan_pembeli.php">PESANAN</a>
           </li>
           <li class="nav-item">
             <a class="nav-link mr-4" href="#">LOGOUT</a>
