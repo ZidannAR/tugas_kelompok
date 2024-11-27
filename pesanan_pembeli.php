@@ -92,36 +92,36 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
         <?php $totalbelanja = 0; ?>
         <?php foreach ($_SESSION["pesanan"] as $id_menu => $jumlah) : ?>
 
-        <?php
-        require_once("koneksi.php");
-        $ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
-        $pecah = $ambil->fetch_assoc();
-        $subharga = $pecah["harga"] * $jumlah;
-        ?>
+          <?php
+          require_once("koneksi.php");
+          $ambil = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_menu='$id_menu'");
+          $pecah = $ambil->fetch_assoc();
+          $subharga = $pecah["harga"] * $jumlah;
+          ?>
 
-        <!-- Menu -->
-        <tr>
-          <td>
-            <?= $no++; ?>
-          </td>
-          <td>
-            <?= $pecah["nama_menu"]; ?>
-          </td>
-          <td>Rp. <?php echo number_format($pecah["harga"]);  ?>
-          </td>
-          <td>
-            <?= $jumlah; ?>
-          </td>
-          <td>Rp.
-            <?= number_format($subharga)  ?>
-          </td>
-          <?php $totalbelanja += $subharga; ?>
-          <td>
-            <a href="hapus_pesanan_pembeli.php?id_menu=<?php echo $id_menu ?>" class="badge badge-danger">Hapus</a>
-          </td>
-        </tr>
+          <!-- Menu -->
+          <tr>
+            <td>
+              <?= $no++; ?>
+            </td>
+            <td>
+              <?= $pecah["nama_menu"]; ?>
+            </td>
+            <td>Rp. <?php echo number_format($pecah["harga"]);  ?>
+            </td>
+            <td>
+              <?= $jumlah; ?>
+            </td>
+            <td>Rp.
+              <?= number_format($subharga)  ?>
+            </td>
+            <?php $totalbelanja += $subharga; ?>
+            <td>
+              <a href="hapus_pesanan_pembeli.php?id_menu=<?php echo $id_menu ?>" class="badge badge-danger">Hapus</a>
+            </td>
+          </tr>
         <?php
-          endforeach;
+        endforeach;
         ?>
       </tbody>
       <tfoot>
@@ -132,31 +132,32 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
     </table><br>
 
     <form method="POST" action="">
-        <a href="menu_pembeli.php" class="btn btn-primary btn-sm">Lihat Menu</a>
-        <button class="btn btn-success btn-sm" name="konfirm">Konfirmasi Pesanan</button>
-      </form>
+      <a href="menu_pembeli.php" class="btn btn-primary btn-sm">Lihat Menu</a>
+      <button class="btn btn-success btn-sm" name="konfirm">Konfirmasi Pesanan</button>
+    </form>
 
-      <?php
-      if(isset($_POST["konfirm"])){
-        $tanggal_pemesanan = date("Y-m-d");
+    <?php
+    if (isset($_POST["konfirm"])) {
+      $tanggal_pemesanan = date("Y-m-d");
 
-        $insert = mysqli_query($koneksi,"INSERT INTO pemesanan (tanggal_pemesanan, total_belanja) VALUES ('$tanggal_pemesanan','$totalbelanja')");
+      $idMenu = $pecah['id_menu'];
 
-        $id_terbaru = $koneksi->insert_id;
+      $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (id_menu, tanggal_pemesanan, total_belanja) VALUES ($idMenu, '$tanggal_pemesanan','$totalbelanja')");
+
+      $id_terbaru = $koneksi->insert_id;
 
 
-        foreach($_SESSION["pesanan"] as  $id_menu => $jumlah)
-        {
-          $insert = mysqli_query($koneksi,"INSERT INTO detail_pemesanan(id_pemesanan, id_menu, jumlah) 
+      foreach ($_SESSION["pesanan"] as  $id_menu => $jumlah) {
+        $insert = mysqli_query($koneksi, "INSERT INTO detail_pemesanan(id_pemesanan, id_menu, jumlah) 
           VALUES ('$id_terbaru', '$id_menu','$jumlah') ");
-        }
-
-        unset($_SESSION["pesanan"]);
-
-        echo "<script>alert('pesanan anda telah di konfirmasi')</script>";
-        echo "<script>location= daftar_menu_pembeli.php</script>";
       }
-       ?>
+
+      unset($_SESSION["pesanan"]);
+
+      echo "<script>alert('pesanan anda telah di konfirmasi')</script>";
+      echo "<script>location= daftar_menu_pembeli.php</script>";
+    }
+    ?>
 
     <hr class="footer">
     <div class="container">

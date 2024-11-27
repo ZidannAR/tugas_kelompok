@@ -1,92 +1,71 @@
-<?php include('./template/header.php');
+<?php
+include('./template/header.php');
+require_once('koneksi.php');
 require_once('function.php');
 
-if(isset($_GET['id_menu'])){
-  $id = $_GET['id_menu'];
-  $data = query("SELECT * FROM produk WHERE id_menu = $id")[0];
+$no = 1; // Counter untuk nomor pesanan
+$totalbelanja = 0; // Inisialisasi total belanja
 
-  
-}
- ?>
- 
+// Ambil semua data pesanan
+$data = query("
+  SELECT m.id_menu, m.nama_menu, m.harga, dp.jumlah, p.tanggal_pemesanan 
+  FROM produk m 
+  JOIN detail_pemesanan dp ON m.id_menu = dp.id_menu 
+  JOIN pemesanan p ON dp.id_pemesanan = p.id_pemesanan
+");
 
-  <!-- Menu -->
-    <div class="container">
-      <div class="judul-pesanan mt-5\">
-       
-        <h3 class="text-center font-weight-bold">DATA PESANAN</h3>
-        
-      </div>
-      <table class="table table-bordered" id="example">
-        <thead class="thead-light">
+?>
+
+<!-- Menu -->
+<div class="container">
+  <div class="judul-pesanan mt-5">
+    <h3 class="text-center font-weight-bold">DATA PESANAN</h3>
+  </div>
+  <table class="table table-bordered" id="example">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">No</th>
+        <th scope="col">ID Menu</th>
+        <th scope="col">Nama Pesanan</th>
+        <th scope="col">Harga Satuan</th>
+        <th scope="col">Jumlah</th>
+        <th scope="col">Subtotal</th>
+        <th scope="col">Tanggal</th>
+        <th scope="col">Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if ($data): ?>
+        <?php foreach ($data as $menu): 
+          $subharga = $menu['harga'] * $menu['jumlah']; // Hitung subtotal
+          $totalbelanja += $subharga; // Tambahkan ke total belanja
+        ?>
           <tr>
-            <th scope="col">ID</th>
-            <th scope="col">No. Meja</th>
-            <th scope="col">Nama Pesanan</th>
-            <th scope="col">Jumlah</th>
-            <th scope="col">Tanggal</th>
-            <th scope="col">Status</th>
-            <th scope="col">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>01</td>
-            <td><?= $data ['nama_menu']?></td>
-            <td>2</td>
-            <td>2020-01-03</td>
-            <td>Belum Bayar</td>
+            <td><?= $no++; ?></td>
+            <td><?= $menu['id_menu']; ?></td>
+            <td><?= $menu['nama_menu']; ?></td>
+            <td>Rp. <?= number_format($menu['harga'], 0, ',', '.'); ?></td>
+            <td><?= $menu['jumlah']; ?></td>
+            <td>Rp. <?= number_format($subharga, 0, ',', '.'); ?></td>
+            <td><?= $menu['tanggal_pemesanan']; ?></td>
             <td>
-              <a href="#" class="badge badge-danger">Hapus Data</a>
+              <a href="hapus.php?id=<?= $menu['id_menu']; ?>" class="badge badge-danger" onclick="return confirm('Yakin ingin menghapus data ini?')">Hapus Data</a>
             </td>
           </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>10</td>
-            <td>Nasi Goreng</td>
-            <td>2</td>
-            <td>2020-04-20</td>
-            <td>Belum Bayar</td>
-            <td>
-              <a href="#" class="badge badge-danger">Hapus Data</a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>06</td>
-            <td>Jus Mangga</td>
-            <td>6</td>
-            <td>2020-02-15</td>
-            <td>Belum Bayar</td>
-            <td>
-              <a href="#" class="badge badge-danger">Hapus Data</a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">4</th>
-            <td>02</td>
-            <td>Teh Obeng</td>
-            <td>3</td>
-            <td>2020-02-24</td>
-            <td>Belum Bayar</td>
-            <td>
-              <a href="#" class="badge badge-danger">Hapus Data</a>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">5</th>
-            <td>07</td>
-            <td>Nasi Goreng</td>
-            <td>2</td>
-            <td>2020-05-15</td>
-            <td>Belum Bayar</td>
-            <td>
-              <a href="#" class="badge badge-danger">Hapus Data</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  <!-- Akhir Menu -->
-  <?php include('./template/footer.php'); ?>
+        <?php endforeach; ?>
+        <tr>
+          <td colspan="5" class="text-right font-weight-bold">Total Bayar:</td>
+          <td>Rp. <?= number_format($totalbelanja, 0, ',', '.'); ?></td>
+          <td colspan="2"></td>
+        </tr>
+      <?php else: ?>
+        <tr>
+          <td colspan="8" class="text-center">Produk tidak ditemukan.</td>
+        </tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
+</div>
+<!-- Akhir Menu -->
+
+<?php include('./template/footer.php'); ?>

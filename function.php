@@ -128,3 +128,24 @@ function register_admin($data)
               header("location: login_admin.php");
        }
 }
+function register_user($data)
+{
+    global $koneksi;
+
+    $nama_lengkap = htmlspecialchars($data['nama_lengkap']);
+    $jenis_kelamin = htmlspecialchars($data['jenis_kelamin']);
+    $alamat = htmlspecialchars($data['alamat']);
+    $no_hp = htmlspecialchars($data['hp']);
+    $username = htmlspecialchars($data['username']);
+    $password = password_hash($data['password'], PASSWORD_DEFAULT); // Amankan password
+
+    $query = "INSERT INTO user (nama_lengkap, jenis_kelamin, alamat, hp, username, password) 
+              VALUES ('$nama_lengkap', '$jenis_kelamin', '$alamat', '$no_hp', '$username', '$password')";
+
+    if (!mysqli_query($koneksi, $query)) {
+        die("Error: " . mysqli_error($koneksi)); // Menangkap error query
+    }
+    if($query){
+       header("location: login_pembeli.php");
+    }
+}

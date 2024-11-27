@@ -64,7 +64,7 @@
             <div class="card bg-dark text-white border-light">
               <img src="images/background/menu2.jpg" class="card-img" alt="Lihat Daftar Menu">
               <div class="card-img-overlay mt-5 text-center">
-               <a href="daftar_menu.html" class="btn btn-primary">LIHAT DAFTAR MENU</a>
+               <a href="daftar_menu.html" class="btn btn-primary">LIST HP KITA</a>
               </div>
             </div>
           </div>
@@ -73,7 +73,7 @@
             <div class="card bg-dark text-white border-light">
               <img src="images/background/menu3.jpg" class="card-img" alt="Lihat Pesanan">
               <div class="card-img-overlay mt-5 text-center">
-               <a href="pesanan.html" class="btn btn-primary">LIHAT PESANAN</a>
+               <a href="pesanan.html" class="btn btn-primary">LIHAT PESANAN ANDA</a>
               </div>
             </div>
           </div>
