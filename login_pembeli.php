@@ -1,3 +1,23 @@
+<?php
+require('koneksi.php');
+if(isset($_POST['login'])){
+  $username = $_POST['username'];
+  $password = $_POST['password'];
+
+  $result = mysqli_query($koneksi,"SELECT * FROM user WHERE username = '$username'");
+
+  if(mysqli_num_rows($result) == 1){
+    $row = mysqli_fetch_assoc($result);
+
+    if(password_verify($password,$row['password'])){
+
+      header("location: index_pembeli.php");
+      exit;
+    }
+  }
+  $error = true;
+}
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,7 +95,7 @@
 <body>
   <div class="login-container">
     <h2>Login</h2>
-    <form>
+    <form method="post" action="">
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" placeholder="Masukkan username" required>
@@ -84,7 +104,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="Masukkan password" required>
       </div>
-      <button type="submit" class="btn-submit">Login</button>
+      <button type="submit" class="btn-submit" name="login">Login</button>
     </form>
     <p class="footer-text">
       Belum punya akun? <a href="register_pembeli.html">Daftar di sini</a>
