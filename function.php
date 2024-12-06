@@ -108,6 +108,17 @@ function hapus_menu($id)
 
 
 }
+function hapus_pesanan_pembeli($id)
+{
+       global $koneksi;
+
+       $query = "DELETE FROM pemesanan WHERE id_menu = $id";
+
+       mysqli_query($koneksi, $query);
+       return mysqli_affected_rows($koneksi);
+
+
+}
 function register_admin($data)
 {
        global $koneksi;

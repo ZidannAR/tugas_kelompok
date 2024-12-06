@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['login'])){
+  header("location: login_pembeli.php");
+}
+?>
+<?php
 require_once("function.php");
 ?>
 <!doctype html>

@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if(!isset($_SESSION['login'])){
+  header("location: login_pembeli.php");
+}
+?>
+<?php
 require_once('function.php');
 require_once('koneksi.php');
 
@@ -141,8 +148,9 @@ if (empty($_SESSION["pesanan"]) or !isset($_SESSION["pesanan"])) {
       $tanggal_pemesanan = date("Y-m-d");
 
       $idMenu = $pecah['id_menu'];
+      $id_user = $pecah['id_user'];
 
-      $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (id_menu, tanggal_pemesanan, total_belanja) VALUES ($idMenu, '$tanggal_pemesanan','$totalbelanja')");
+      $insert = mysqli_query($koneksi, "INSERT INTO pemesanan (id_menu, tanggal_pemesanan, total_belanja,id_user) VALUES ($idMenu, '$tanggal_pemesanan','$totalbelanja','$id_user')");
 
       $id_terbaru = $koneksi->insert_id;
 
